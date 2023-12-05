@@ -20,3 +20,11 @@ dummy_laptop_database = [
     {"id": 19, "nama": "HP Envy x360", "brand": "HP", "processor": "AMD Ryzen 5", "vga": "AMD Radeon Graphics", "ram": "8GB", "segmen": "Notebook"},
     {"id": 20, "nama": "MacBook Pro 16-inch", "brand": "Apple", "processor": "Intel i9", "vga": "AMD Radeon Pro 5500M", "ram": "64GB", "segmen": "Gaming"}
 ]
+
+print('test')
+print("dah kelar")
+print("ghaisan")
+print("aseprudi")
+print('bang ini nyoba aja')
+print("PT Nepnep Tbk perusahaan narkobay")
+print("geh gey")
