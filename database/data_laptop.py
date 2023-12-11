@@ -20,3 +20,13 @@ dummy_laptop_database = [
     {"id": 19, "nama": "HP Envy x360", "brand": "HP", "processor": "AMD Ryzen 5", "vga": "AMD Radeon Graphics", "ram": "8GB", "segmen": "Notebook"},
     {"id": 20, "nama": "MacBook Pro 16-inch", "brand": "Apple", "processor": "Intel i9", "vga": "AMD Radeon Pro 5500M", "ram": "64GB", "segmen": "Gaming"}
 ]
+
+test = {
+    "id": 1,
+    "nama": "Asus ROG Strix G",
+    "brand": "Asus",
+    "processor": "Intel i7",
+    "vga": "NVIDIA GTX 1660 Ti",
+    "ram": "16GB",
+    "segmen": "Gaming"
+}
