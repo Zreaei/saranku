@@ -55,18 +55,6 @@ def sort_gadget(result, pilihan):
         df_sorted = result.sort_values(by='harga', ascending=False)
         # Menampilkan hasil
         print(df_sorted)
-   
-
-# # Detail Gadget
-# def detail_gadget(file_path, id):
-#     with open(file_path, "r") as csv_file:
-#         lines = csv_file.readlines()
-
-#         for line in lines:
-#             data = line.strip().split(",")
-
-#             if line.startswith("id"):
-#                 continue
 
 # Detail Gadget v2
 def details(df, selected_id):

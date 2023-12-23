@@ -15,7 +15,7 @@ while True:
     if pilihan == 1:
         target_keyword = input("Masukan Kata Kunci: ")
         result = laptop.cari_item_csv(file_path, target_keyword)
-        print(result)
+        print(result[["id", "brand", "nama_laptop", "processor", "vga", "harga"]])
     
         print("\n1. Urutkan Berdasarkan Harga")
         print("2. Cek Detail Gadget")
