@@ -42,7 +42,7 @@ def cari_item_csv(file_path, target_keyword):
     except Exception as e:
         print(f"Terjadi kesalahan: {str(e)}")
 
-# Sort Gadget
+# Sort Gadget Search
 def sort_gadget(result, pilihan):
     if pilihan == 1:
          # Mengurutkan DataFrame berdasarkan kolom 'harga' secara ascending
@@ -56,8 +56,24 @@ def sort_gadget(result, pilihan):
         # Menampilkan hasil
         print(df_sorted)
 
-# Detail Gadget v2
-def details(df, selected_id):
+# Sort Gadget View
+def sort_view_gadget(file_path, pilihan):
+    if pilihan == 1:
+        df = pd.read_csv(file_path)
+         # Mengurutkan DataFrame berdasarkan kolom 'harga' secara ascending
+        df_sorted = df.sort_values(by='harga')
+        # Menampilkan hasil
+        print(df_sorted)
+
+    elif pilihan == 2:
+        df = pd.read_csv(file_path)
+         # Mengurutkan DataFrame berdasarkan kolom 'harga' secara descending
+        df_sorted = df.sort_values(by='harga', ascending=False)
+        # Menampilkan hasil
+        print(df_sorted)
+
+# Detail Gadget Search
+def detail_search(df, selected_id):
     # Input untuk memilih satu baris berdasarkan ID
     if selected_id and selected_id.isdigit():
         selected_row = df[df['id'] == int(selected_id)]
@@ -72,6 +88,27 @@ def details(df, selected_id):
             print(f"Penyimpanan: {selected_row['storage'].values[0]}")
             print(f"Monitor: {selected_row['monitor'].values[0]}")
             print(f"Harga: {selected_row['harga'].values[0]}")
+        else:
+            print(f"Tidak ada baris dengan ID {selected_id}.")
+    else:
+        print("ID yang dimasukkan tidak valid.")
+
+# Detail Gadget View
+def detail_view(df, selected_id, columns=None):
+    # Input untuk memilih satu baris berdasarkan ID
+    if selected_id and selected_id.isdigit():
+        selected_row = df[df['id'] == int(selected_id)]
+        if not selected_row.empty:
+            # Menampilkan informasi dengan format yang diinginkan
+            print(f"\nDetail Laptop dengan ID {selected_id}:")
+            
+            if columns is None:
+                # Jika tidak ada kolom yang ditentukan, tampilkan semua kolom
+                columns = df.columns.tolist()
+            
+            for column in columns:
+                # Cetak setiap kolom dan nilai di baris yang dipilih
+                print(f"{column}: {selected_row[column].values[0]}")
         else:
             print(f"Tidak ada baris dengan ID {selected_id}.")
     else:
