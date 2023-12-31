@@ -1,12 +1,16 @@
-import csv
+import os
 import pandas as pd
 
 file_path = "database/data.csv"
 
+# Clear Terminal
+def clear():
+    os.system("cls")
+
 # View Gadget
 def view_gadget(file_path):
     # Membaca file CSV
-    df = pd.read_csv(file_path)
+    df = pd.read_csv(file_path, index_col="id")
     columns = ["brand", "nama_laptop", "processor", "vga", "harga"]
     view_columns = df[columns]
     # Menampilkan DataFrame
@@ -36,28 +40,46 @@ def cari_item_csv(file_path, target_keyword):
         if not result_df.empty:
             return result_df  # Menampilkan DataFrame jika ada hasil
         else:
-            print(f"Tidak ditemukan informasi dengan kata kunci '{target_keyword}' dalam file.")
+            return pd.DataFrame()
     except FileNotFoundError:
         print(f"File tidak ditemukan: {file_path}")
+        return pd.DataFrame()
     except Exception as e:
         print(f"Terjadi kesalahan: {str(e)}")
+        return pd.DataFrame()
 
-# Sort Gadget
+# Sort Gadget Search
 def sort_gadget(result, pilihan):
     if pilihan == 1:
          # Mengurutkan DataFrame berdasarkan kolom 'harga' secara ascending
         df_sorted = result.sort_values(by='harga')
         # Menampilkan hasil
-        print(df_sorted)
+        return df_sorted
 
     elif pilihan == 2:
          # Mengurutkan DataFrame berdasarkan kolom 'harga' secara descending
         df_sorted = result.sort_values(by='harga', ascending=False)
         # Menampilkan hasil
+        return df_sorted
+
+# Sort Gadget View
+def sort_view_gadget(file_path, pilihan):
+    if pilihan == 1:
+        df = pd.read_csv(file_path, index_col="id")
+         # Mengurutkan DataFrame berdasarkan kolom 'harga' secara ascending
+        df_sorted = df.sort_values(by='harga')
+        # Menampilkan hasil
         print(df_sorted)
 
-# Detail Gadget v2
-def details(df, selected_id):
+    elif pilihan == 2:
+        df = pd.read_csv(file_path, index_col="id")
+         # Mengurutkan DataFrame berdasarkan kolom 'harga' secara descending
+        df_sorted = df.sort_values(by='harga', ascending=False)
+        # Menampilkan hasil
+        print(df_sorted)
+
+# Detail Gadget Search
+def detail_search(df, selected_id):
     # Input untuk memilih satu baris berdasarkan ID
     if selected_id and selected_id.isdigit():
         selected_row = df[df['id'] == int(selected_id)]
@@ -73,6 +95,29 @@ def details(df, selected_id):
             print(f"Monitor: {selected_row['monitor'].values[0]}")
             print(f"Harga: {selected_row['harga'].values[0]}")
         else:
-            print(f"Tidak ada baris dengan ID {selected_id}.")
+            print(f"==[!]== Tidak ada baris dengan ID {selected_id} ==[!]==")
     else:
-        print("ID yang dimasukkan tidak valid.")
+        clear()
+        print("==[!]== ID yang dimasukkan tidak valid ==[!]==")
+
+# Detail Gadget View
+def detail_view(df, selected_id, columns=None):
+    # Input untuk memilih satu baris berdasarkan ID
+    if selected_id and selected_id.isdigit():
+        selected_row = df[df['id'] == int(selected_id)]
+        if not selected_row.empty:
+            # Menampilkan informasi dengan format yang diinginkan
+            print(f"\nDetail Laptop dengan ID {selected_id}:")
+            
+            if columns is None:
+                # Jika tidak ada kolom yang ditentukan, tampilkan semua kolom
+                columns = df.columns.tolist()
+            
+            for column in columns:
+                # Cetak setiap kolom dan nilai di baris yang dipilih
+                print(f"{column.title()}: {selected_row[column].values[0]}")
+        else:
+            print(f"==[!]== Tidak ada baris dengan ID {selected_id} ==[!]==")
+    else:
+        clear()
+        print("==[!]== ID yang dimasukkan tidak valid ==[!]==")
